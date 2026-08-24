@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import socket
 from datetime import timedelta
 
 from homeassistant.core import HomeAssistant
@@ -44,7 +45,12 @@ class AircraftMonitorCoordinator(DataUpdateCoordinator[MonitorSummary]):
         self.entry_id = entry_id
         self.location_name = name
         self.config = config
-        self._client = AdsbLolClient(async_get_clientsession(hass))
+        # Force IPv4: api.adsb.lol advertises AAAA records that are blackholed
+        # from some networks, and aiohttp's happy-eyeballs would otherwise hang
+        # on IPv6 until the request times out.
+        self._client = AdsbLolClient(
+            async_get_clientsession(hass, family=socket.AF_INET)
+        )
         self._tracker = ApproachTracker(
             alert_distance_m=config.alert_distance_m,
             poll_interval_s=config.poll_interval_s,
