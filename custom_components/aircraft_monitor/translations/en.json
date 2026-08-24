@@ -1,0 +1,56 @@
+{
+  "entity": {
+    "sensor": {
+      "aircraft_count": { "name": "Aircraft count" },
+      "nearest_aircraft": { "name": "Nearest aircraft" },
+      "approaching_aircraft": { "name": "Approaching aircraft" }
+    },
+    "binary_sensor": {
+      "aircraft_approaching": { "name": "Aircraft approaching" }
+    }
+  },
+  "config": {
+    "step": {
+      "user": {
+        "title": "Aircraft Monitor",
+        "description": "Monitor a location for approaching aircraft using the ADSB.lol API.",
+        "data": {
+          "name": "Name",
+          "latitude": "Latitude",
+          "longitude": "Longitude"
+        }
+      }
+    },
+    "error": {
+      "invalid_latitude": "Latitude must be between -90 and 90.",
+      "invalid_longitude": "Longitude must be between -180 and 180."
+    },
+    "abort": {
+      "already_configured": "This location is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Aircraft Monitor options",
+        "data": {
+          "radius_km": "Search radius (km)",
+          "alert_distance_m": "Alert distance (m)",
+          "prediction_time_s": "Prediction time (s)",
+          "poll_interval_s": "Polling interval (s)",
+          "min_altitude_ft": "Minimum altitude (ft)",
+          "max_altitude_ft": "Maximum altitude (ft)",
+          "min_speed_kts": "Minimum speed (knots)"
+        }
+      }
+    },
+    "error": {
+      "invalid_radius": "Search radius must be greater than 0.",
+      "invalid_alert_distance": "Alert distance must be greater than 0.",
+      "invalid_prediction_time": "Prediction time must be greater than 0.",
+      "invalid_poll_interval": "Polling interval must be at least 5 seconds.",
+      "invalid_altitude_range": "Minimum altitude must not exceed maximum altitude.",
+      "invalid_min_speed": "Minimum speed must be 0 or greater."
+    }
+  }
+}
