@@ -83,7 +83,7 @@ Then the tunables (editable any time via the entry's **Configure** button):
 | Search radius (km)  | 20      | > 0                   |
 | Alert distance (m)  | 250     | > 0                   |
 | Prediction time (s) | 180     | > 0                   |
-| Polling interval (s)| 10      | ≥ 5                   |
+| Polling interval (s)| 30      | ≥ 5                   |
 | Minimum altitude (ft)| 0      | ≤ maximum altitude    |
 | Maximum altitude (ft)| 15000  | ≥ minimum altitude    |
 | Minimum speed (kt)  | 25      | ≥ 0                   |
@@ -212,9 +212,11 @@ https://api.adsb.lol/v2/lat/{lat}/lon/{lon}/dist/{radius_nm}
 ```
 
 The radius you configure in kilometres is converted to nautical miles
-(`nm = km / 1.852`). No API key is used. At the default 10-second polling this
-is roughly 8,640 requests per day per location — please be considerate; a larger
-interval (e.g. 15 s) is friendlier to a free community service.
+(`nm = km / 1.852`). No API key is used. At the default 30-second polling this
+is roughly 2,880 requests per day per location. Please be considerate: polling
+too aggressively (e.g. every few seconds) can get your IP temporarily rate
+limited by this free community service, so only lower the interval if you know
+it is acceptable.
 
 ## Privacy
 
